@@ -32,9 +32,26 @@ def get_alerte():
                 alerte_link = "Lien non trouvé"
     
             # Affichage des résultats
-            print("Date :", date_text)
-            print("Alerte :", alerte_text)
-            print("Lien :", alerte_link)
+            #print("Date :", date_text)
+            #print("Alerte :", alerte_text)
+            #print("Lien :", alerte_link)
+
+            #formattage des resultat
+            alerte = {
+                
+                "Date :", date_text,
+                "Alerte :", alerte_text,
+                "Lien :", alerte_link
+            }
+
+    return alerte
+
+    
     
     else:
         print("Erreur lors de la requête :", response.status_code)
+
+
+def dump_alerte():
+        with open("data.json", "a") as f:
+                f.write(json.dumps(get_alerte()) + "\n")
