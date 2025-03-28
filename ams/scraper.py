@@ -13,14 +13,29 @@ if response.status_code == 200:
     first_item = soup.find("div", class_="item cert-cti open")
 
     if first_item:
-        # Recherche de la div qui contient la référence
-        item_ref_name = first_item.find("div", class_="item-ref")
-        if item_ref_name:
-            # Récupération de la balise <a> et de son texte
-            a_tag = item_ref_name.find("a")
+
+        # Extraction de la date
+        date_span = first_item.find("span", class_="item-date")
+        date_text = date_span.get_text(strip=True) if date_span else "Date non trouvée"
+        
+        # Extraction de la référence et du lien
+        item_ref = first_item.find("div", class_="item-ref")
+        if item_ref:
+            a_tag = item_ref.find("a")
             if a_tag:
                 ref_text = a_tag.get_text(strip=True)
-                print("La référence est :", ref_text)
+                ref_link = a_tag.get("href")
+            else:
+                ref_text = "Alerte non trouvée"
+                ref_link = "Lien non trouvé"
+        else:
+            ref_text = "Alerte non trouvée"
+            ref_link = "Lien non trouvé"
+        
+        # Affichage des résultats
+        print("Date :", date_text)
+        print("Référence :", ref_text)
+        print("Lien :", ref_link)
 
 else:
     print("Erreur lors de la requête :", response.status_code)
