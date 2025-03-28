@@ -6,8 +6,8 @@ import os
 DB = "database.db"
 
 def create_table():
-    
-    conn = sqlite3.connect(DB_FILE)
+
+    conn = sqlite3.connect(DB)
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS archive (
@@ -37,11 +37,12 @@ def insert_json_to_db(json_file):
                 print(f" Erreur JSON sur la ligne : {line}")
                 continue  # Ignorer la ligne si elle est invalide
 
-            cursor.execute("INSERT INTO data_archive (data) VALUES (?)", (json.dumps(data),))
+            cursor.execute("INSERT INTO archive (data) VALUES (?)", (json.dumps(data),))
 
     conn.commit()
     conn.close()
 
-
-insert_json_to_db("data.json")
-
+def clear_json_file(filename):
+    with open(filename, "w") as file:
+        file.write("")  # Écrit un fichier vide
+    print(f" Le fichier {filename} a été vidé.")
