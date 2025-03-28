@@ -1,0 +1,5 @@
+def clear_json_file(filename):
+    """Efface toutes les données du fichier JSON en le vidant."""
+    with open(filename, "w") as file:
+        file.write("")  # Écrit un fichier vide
+    print(f"✅ Le fichier {filename} a été vidé.")
