@@ -7,5 +7,7 @@ import subprocess
 cpu_info.dump_cpu_info()
 ram_info.dump_ram_info()
 
+data_manager.insert_json_to_db()
+print("Tâche terminé")
 
 
