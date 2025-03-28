@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 # Connexion à SQLite
-conn = sqlite3.connect("data_storage.db")
+conn = sqlite3.connect("database.db")
 cursor = conn.cursor()
 
 # Création d'une table avec une colonne JSON
