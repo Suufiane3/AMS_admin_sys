@@ -7,7 +7,7 @@ cursor = conn.cursor()
 
 # Création d'une table avec une colonne JSON
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS data_archive (
+CREATE TABLE IF NOT EXISTS archive (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     data JSON
@@ -24,7 +24,7 @@ def insert_json_to_db(json_file):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute("INSERT INTO data_archive (data) VALUES (?)", (json.dumps(data),))
+    cursor.execute("INSERT INTO archive (data) VALUES (?)", (json.dumps(data),))
 
     conn.commit()
     conn.close()
