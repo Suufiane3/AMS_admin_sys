@@ -1,8 +1,11 @@
 import sqlite3
 import json
+import os
 
 # Connexion à SQLite
-conn = sqlite3.connect("database.db")
+DB = "database.db"
+
+conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
 # Création d'une table avec une colonne JSON
@@ -18,16 +21,26 @@ conn.close()
 
 
 def insert_json_to_db(json_file):
-    with open(json_file, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-    
-    conn = sqlite3.connect("database.db")
+
+    conn = sqlite3.connect(DB)
     cursor = conn.cursor()
 
-    cursor.execute("INSERT INTO archive (data) VALUES (?)", (json.dumps(data),))
-
+    with open(json_file, 'r', encoding='utf-8') as file:
+    for line in file:
+        line = line.strip()  # Enlever les espaces et sauts de ligne
+        if not line:
+            continue  # Ignorer les lignes vides
+        
+        try:
+            data = json.loads(line)  # Convertir la ligne en JSON
+        except json.JSONDecodeError:
+            print(f" Erreur JSON sur la ligne : {line}")
+            continue  # Ignorer la ligne si elle est invalide
+    
+        cursor.execute("INSERT INTO data_archive (data) VALUES (?)", (json.dumps(data),))
+    
     conn.commit()
     conn.close()
 
-# Exemple d'utilisation
+
 insert_json_to_db("data.json")
