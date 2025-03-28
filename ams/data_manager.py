@@ -5,19 +5,19 @@ import os
 # Connexion à SQLite
 DB = "database.db"
 
-conn = sqlite3.connect(DB)
-cursor = conn.cursor()
-
-# Création d'une table avec une colonne JSON
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS archive (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    data JSON
-)
-""")
-conn.commit()
-conn.close()
+def create_table():
+    
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS archive (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            data TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
 
 
 def insert_json_to_db(json_file):
