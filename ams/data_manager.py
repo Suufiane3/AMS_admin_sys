@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime, timedelta
 import json
 import os
 
@@ -16,6 +17,21 @@ def create_table():
             data TEXT
         )
     """)
+    conn.commit()
+    conn.close()
+
+
+def data_time_limite():
+
+    conn = sqlite3.connect(DB)
+    cursor = conn.cursor()
+    
+    # Date limite : aujourd'hui - 30 jours
+    date_limite = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
+    
+    # Suppression des logs trop anciens
+    cursor.execute("DELETE FROM logs WHERE created_at < ?", (date_limite,))
+    
     conn.commit()
     conn.close()
 
