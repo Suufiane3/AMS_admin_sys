@@ -3,20 +3,20 @@ from bs4 import BeautifulSoup
 
 def get_alerte():
     url = "https://www.cert.ssi.gouv.fr/"
-    
+
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
-    
+
         # Recherche du premier objet correspondant a la liste des alertes
         first_item = soup.find("div", class_="item cert-cti open")
-    
+
         if first_item:
-    
+
             # Extraction de la date
             date_span = first_item.find("span", class_="item-date")
             date_text = date_span.get_text(strip=True) if date_span else "Date non trouvée"
-    
+
             # Extraction de l'alerte et du lien
             alerte_div = first_item.find("div", class_="item-ref")
             if alerte_div:
@@ -30,7 +30,7 @@ def get_alerte():
             else:
                 alerte_text = "Alerte non trouvée"
                 alerte_link = "Lien non trouvé"
-    
+
             # Affichage des résultats
             #print("Date :", date_text)
             #print("Alerte :", alerte_text)
@@ -38,7 +38,7 @@ def get_alerte():
 
             #formattage des resultat
             alerte = {
-                
+
                 "Date :", date_text,
                 "Alerte :", alerte_text,
                 "Lien :", alerte_link
@@ -46,8 +46,8 @@ def get_alerte():
 
     return alerte
 
-    
-    
+
+
     else:
         print("Erreur lors de la requête :", response.status_code)
 
