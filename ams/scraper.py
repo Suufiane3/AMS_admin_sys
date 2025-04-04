@@ -40,9 +40,9 @@ def get_alerte():
             #formattage des resultat
             alerte = {
 
-                "Date" : date_text,
-                "Alerte" : alerte_text,
-                "Lien" : alerte_link
+                "Date": date_text,
+                "Alerte": alerte_text,
+                "Lien": alerte_link
             }
 
     
