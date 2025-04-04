@@ -8,3 +8,6 @@ def drop_table():
     conn.commit()
     conn.close()
     print("Table 'archive' supprimé avec succès")
+
+if __name__ == "__main__":
+    drop_table()
