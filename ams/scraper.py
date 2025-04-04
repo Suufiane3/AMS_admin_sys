@@ -44,12 +44,13 @@ def get_alerte():
                 "Lien :", alerte_link
             }
 
+    
+    else:
+        print("Erreur lors de la requête :", response.status_code)
+        
     return alerte
 
 
-
-    else:
-        print("Erreur lors de la requête :", response.status_code)
 
 
 def dump_alerte():
