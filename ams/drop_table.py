@@ -7,3 +7,4 @@ def drop_table():
     cursor.execute("DROP TABLE IF EXISTS archive")
     conn.commit()
     conn.close()
+    print("Table 'archive' supprimé avec succès")
