@@ -45,4 +45,4 @@ def insert_json_to_db(json_file):
 def clear_json_file(filename):
     with open(filename, "w") as file:
         file.write("")  # Écrit un fichier vide
-    print(f" Le fichier {filename} a été vidé.")
+    #print(f"Le fichier {filename} a été vidé.")
