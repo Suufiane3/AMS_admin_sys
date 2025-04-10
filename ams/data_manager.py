@@ -30,7 +30,7 @@ def data_time_limite():
     date_limite = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
     
     # Suppression des logs trop anciens
-    cursor.execute("DELETE FROM archive WHERE created_at < ?", (date_limite,))
+    cursor.execute("DELETE FROM archive WHERE timestamp < ?", (date_limite,))
     
     conn.commit()
     conn.close()
