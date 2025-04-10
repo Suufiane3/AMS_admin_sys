@@ -13,9 +13,13 @@ IS_WINDOWS = platform.system() == "Windows"
 SONDES_DIR = "sondes"  # Dossier contenant les scripts de sondes
 DB_PATH = "database.db"  # Chemin vers la base de données
 REMOTE_MACHINES = [
-    {"name": "pc1", "ip": "192.168.1.101", "user": "ubuntu", "key_path": "~/.ssh/id_rsa"},
-    {"name": "local_vm", "ip": "127.0.0.1", "user": "ubuntu", "key_path": "~/.ssh/id_rsa", "port": 2222},
-    # Ajoutez d'autres machines selon vos besoins
+    {
+        "name": "machine_virtuelle",
+        "ip": "127.0.0.1",
+        "user": "votre_utilisateur_vm",  # Remplacez par votre nom d'utilisateur sur la VM
+        "key_path": "C:\\Users\\votre_nom\\.ssh\\id_rsa",  # Chemin vers votre clé privée
+        "port": 2222
+    }
 ]
 
 def create_table():
@@ -27,6 +31,7 @@ def create_table():
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             machine_name TEXT,
             machine_ip TEXT,
+            type TEXT,
             data TEXT
         )
     """)
@@ -36,6 +41,21 @@ def create_table():
 def clear_json_file(filename):
     with open(filename, "w") as file:
         file.write("")
+
+def determine_data_type(data):
+    """Détermine le type de données basé sur les clés présentes"""
+    if isinstance(data, dict):
+        if "cpu_usage" in data:
+            return "cpu"
+        elif "total_ram" in data or ("percent" in data and "available" in data):
+            return "ram"
+        elif "total_storage" in data:
+            return "storage"
+        elif "Date" in data and "Alerte" in data:
+            return "alerte"
+        elif "is_crisis" in data:
+            return "crisis"
+    return "unknown"
 
 def insert_json_to_db(json_file, machine_name, machine_ip):
     conn = sqlite3.connect(DB_PATH)
@@ -50,14 +70,15 @@ def insert_json_to_db(json_file, machine_name, machine_ip):
 
                 try:
                     data = json.loads(line)
+                    data_type = determine_data_type(data)
+                    
+                    cursor.execute(
+                        "INSERT INTO archive (machine_name, machine_ip, type, data) VALUES (?, ?, ?, ?)",
+                        (machine_name, machine_ip, data_type, json.dumps(data))
+                    )
                 except json.JSONDecodeError:
                     print(f"Erreur JSON sur la ligne : {line}")
                     continue
-
-                cursor.execute(
-                    "INSERT INTO archive (machine_name, machine_ip, data) VALUES (?, ?, ?)",
-                    (machine_name, machine_ip, json.dumps(data))
-                )
         
         conn.commit()
     except Exception as e:
