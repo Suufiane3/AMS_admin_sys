@@ -1,3 +1,4 @@
 appeler les script py aavc subprocess
 mainContr avec cron (execution toute les x min)
 ajout de nouvelle sonde sans avoir à modifer manuellement le code ( on peut mettre toute els sondes dans un folder puis les executer tous un par un)
+ajouter dans la table une nouvelle colonne pour identifier le type d'info (genre colonne type, avec cpu, ram, storage, alerte, isCrisis, ...)
