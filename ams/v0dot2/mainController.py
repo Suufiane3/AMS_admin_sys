@@ -14,7 +14,7 @@ SONDES_DIR = "sondes"  # Dossier contenant les scripts de sondes
 DB_PATH = "database.db"  # Chemin vers la base de données
 REMOTE_MACHINES = [
     #{"name": "pc1", "ip": "192.168.1.101", "user": "ubuntu", "key_path": "~/.ssh/id_rsa"},
-    {"name": "soso", "ip": "127.0.0.1", "user": "soso", "key_path": "C:\\Users\\votre_nom\\.ssh\\id_rsa", "port": 2222}
+    {"name": "pcname", "ip": "127.0.0.1", "user": "username", "key_path": "C:\\Users\\votre_nom\\.ssh\\id_rsa", "port": 2222}
     # Ajoutez d'autres machines selon vos besoins
 ]
 
