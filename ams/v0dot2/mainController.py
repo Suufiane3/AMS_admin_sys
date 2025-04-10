@@ -164,6 +164,7 @@ def execute_remote_sondes(machine):
     
     # Sur Windows, rmdir ne fonctionne que si le répertoire est vide
     try:
+        os.remove(temp_json)
         os.rmdir(temp_dir)
     except OSError as e:
         print(f"Avertissement: impossible de supprimer le dossier temporaire {temp_dir}: {e}")
