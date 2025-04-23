@@ -39,7 +39,7 @@ def determine_data_type(data):
     return "unknown"
 
 def insert_data_to_db(data):
-    """Insère les données JSON dans la base de données"""
+    """Insère les données JSON dans la base de données et gère les crises"""
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
@@ -50,14 +50,20 @@ def insert_data_to_db(data):
             (data_type, json.dumps(data))
         )
         conn.commit()
+
+        if data_type == "crisis" and data.get("is_crisis") == True:
+            print("Situation de crise détectée! Envoi d’un email")
+            subprocess.run(["python3", "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/sendMail.py"], check=True)
+
     except Exception as e:
         print(f"Erreur lors de l'insertion des données: {e}")
-    finally:
-        conn.close()
+        
+    conn.close()
+
 
 
 def clean_outdated_db():
-    """Supprime les données plus anciennes que DATA_RETENTION_DAYS"""
+    """Supprime les données plus anciennes que DATA_CONSERVATION_DAYS"""
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
