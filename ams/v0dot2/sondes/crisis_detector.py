@@ -6,7 +6,7 @@ from ram_info import get_ram_usage
 CRITICAL_THRESHOLD = 90
 
 def get_storage_usage():
-    output = subprocess.check_output(["bash", "storage_info.sh"]).decode().strip()
+    output = subprocess.check_output(["bash", "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/sondes/storage_info.sh"]).decode().strip()
     storage_data = json.loads(output)
     return storage_data
 
