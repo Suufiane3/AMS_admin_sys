@@ -2,16 +2,19 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Adresse Gmail (personnelle)
+# Adresse Gmail
 email_expediteur = "ton.email@gmail.com"
 mdp = "mot_de_passe_application"
 
 # Adresse universitaire de destination
 email_destinataire = "prenom.nom@univ-exemple.fr"
 
+# Lire le contenu de template.txt
+with open("template.txt", "r", encoding="utf-8") as fichier:
+    corps = fichier.read()
+
 # Sujet et contenu
 sujet = "Crisis situation!"
-corps = "Bonjour,\n\nCeci est un test d’envoi d’email depuis un script Python vers mon email universitaire.\n\nBien cordialement."
 
 # Construction de l'email
 message = MIMEMultipart()
