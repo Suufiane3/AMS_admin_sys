@@ -2,7 +2,7 @@ import os
 import subprocess
 import sqlite3
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Configuration
 SONDES_DIR = "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/sondes"  # Dossier contenant les scripts de sondes
