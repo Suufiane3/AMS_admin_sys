@@ -7,7 +7,7 @@ from datetime import datetime
 # Configuration
 SONDES_DIR = "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/sondes"  # Dossier contenant les scripts de sondes
 DB_PATH = "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/database.db"  # Chemin vers la base de données
-DATA_CONSERVATION_DAYS = 30 # Durée de conservation des données (en jours)
+DATA_CONSERVATION_DAYS = 7 # Durée de conservation des données (en jours)
 
 def create_table():
     conn = sqlite3.connect(DB_PATH)
