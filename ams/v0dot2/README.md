@@ -4,7 +4,7 @@
 
 Le script `mainController.py` est un outil de surveillance système automatisé.  
 Il est conçu pour être exécuté automatiquement toutes les minutes via une tâche cron (crontab).  
-Son objectif est de surveiller en temps réel les ressources principales du système — **CPU**, **RAM** et **stockage** — et de notifier l'utilisateur en cas de situation critique.
+Son objectif est de surveiller en temps réel les ressources principales du système **CPU**, **RAM** et **stockage** et de notifier l'utilisateur en cas de situation critique.
 
 ## Fonctionnalités
 
