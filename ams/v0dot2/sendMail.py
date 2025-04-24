@@ -13,7 +13,7 @@ email_destinataire = "prenom.nom@univ-exemple.fr"
 with open("template.txt", "r", encoding="utf-8") as fichier:
     corps = fichier.read()
 
-# Sujet et contenu
+# Sujet
 sujet = "Crisis situation!"
 
 # Construction de l'email
