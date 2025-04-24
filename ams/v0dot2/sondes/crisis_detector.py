@@ -3,7 +3,9 @@ import subprocess
 from cpu_info import get_cpu_usage
 from ram_info import get_ram_usage
 
-CRITICAL_THRESHOLD = 90
+def get_threshold(filepath="../threshold.txt"):
+    with open(filepath, "r") as file:
+        return int(file.read().strip())
 
 def get_storage_usage():
     output = subprocess.check_output(["bash", "/home/soso/ams2/AMS_admin_sys/ams/v0dot2/sondes/storage_info.sh"]).decode().strip()
@@ -11,6 +13,7 @@ def get_storage_usage():
     return storage_data
 
 def check_crisis():
+    CRITICAL_THRESHOLD = get_threshold()
     cpu_data = get_cpu_usage()
     ram_data = get_ram_usage()
     storage_data = get_storage_usage()
