@@ -24,7 +24,7 @@ Son objectif est de surveiller en temps réel les ressources principales du syst
 ## Installation
 
 1. Assurez-vous d'avoir **Python 3** installé.
-2. Installez les bibliothèques nécessaires : `pygal`, `sqlite3`, `json`, `subprocess`
+2. Installez les bibliothèques nécessaires : `pygal`, `sqlite3`, `json`, `subprocess`, `flask`, `psutil`
 3. Placez le script dans un répertoire accessible.
 
 ## Utilisation avec crontab
