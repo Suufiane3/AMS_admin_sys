@@ -1,0 +1,7 @@
+Bonjour,
+
+Ceci est un message envoyé automatiquement.
+Votre serveur Ubuntu est actuellement en surcharge !
+
+Cordialement,
+MonitoringSystem
